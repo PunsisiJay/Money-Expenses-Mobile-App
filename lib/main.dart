@@ -1,6 +1,7 @@
 import 'package:expenzes_app/screens/main_screen.dart';
 import 'package:expenzes_app/screens/onboarding_screen.dart';
 import 'package:expenzes_app/screens/user_screen.dart';
+import 'package:expenzes_app/widgets/wrapper_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,15 +16,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Expense App",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "Inter"
-      ),
-      home: MainScreen()
-      //OnboardingScreen()
-      //UserScreen()
-    );
+    return FutureBuilder(
+      future: SharedPreferences.getInstance(), 
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting){
+          return CircularProgressIndicator();
+        } else {
+          bool hasUserName = snapshot.data!.getString("username") != null;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(           
+              fontFamily: "Inter"
+            ),
+            home: Wrapper(
+              showMainScreen: hasUserName
+            ),
+          );
+        }
+      },
+    );    
   }
 }

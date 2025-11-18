@@ -33,4 +33,12 @@ class UserService {
       err.toString();
     }
   }
+
+
+  //Check if the username already exists in the local storage
+  static Future<bool> checkUserAvailable() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String ? userName = pref.getString('username');
+    return userName != null;
+  }
 }
