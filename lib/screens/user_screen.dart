@@ -1,4 +1,6 @@
 import 'package:expenzes_app/constant/colors.dart';
+import 'package:expenzes_app/screens/main_screen.dart';
+import 'package:expenzes_app/services/user_service.dart';
 import 'package:expenzes_app/widgets/shared_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +17,7 @@ class _UserScreenState extends State<UserScreen> {
   bool isChecked = false;
 
   //Controllers
-  final TextEditingController _nameController= TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPWController = TextEditingController();
@@ -53,7 +55,7 @@ class _UserScreenState extends State<UserScreen> {
                       TextFormField(
                         controller: _nameController,
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Please enter your name here!";
                           }
                         },
@@ -84,7 +86,7 @@ class _UserScreenState extends State<UserScreen> {
                       TextFormField(
                         controller: _emailController,
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Please enter your email here!";
                           }
                         },
@@ -115,7 +117,7 @@ class _UserScreenState extends State<UserScreen> {
                       TextFormField(
                         controller: _passwordController,
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Please enter your password here!";
                           }
                         },
@@ -157,7 +159,7 @@ class _UserScreenState extends State<UserScreen> {
                       TextFormField(
                         controller: _confirmPWController,
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Please enter here confirm password!";
                           }
                           // else if(_passwordController != _confirmPWController){
@@ -216,7 +218,7 @@ class _UserScreenState extends State<UserScreen> {
                           Expanded(
                             child: CheckboxListTile(
                               activeColor: kMainColor,
-                              value: isChecked, 
+                              value: isChecked,
                               onChanged: (value) {
                                 setState(() {
                                   isChecked = value!;
@@ -227,26 +229,44 @@ class _UserScreenState extends State<UserScreen> {
                         ],
                       ),
 
-                      SizedBox(
-                        height: 20,
-                      ),
+                      SizedBox(height: 20),
 
                       //Sumbit Button
                       GestureDetector(
-                        onTap: () {
-                          if(_formKey.currentState!.validate()){
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
                             String username = _nameController.text;
                             String usermail = _emailController.text;
                             String userPW = _passwordController.text;
                             String userCPW = _confirmPWController.text;
 
-                            print("$username $usermail $userPW $userCPW");
+                            //print("$username $usermail $userPW $userCPW");
+                            //save the username and email to local storage.
+                            await UserService.saveUserData(
+                              userName: username,
+                              userEmail: usermail,
+                              password: userPW,
+                              confirmPassword: userCPW,
+                              context: context,
+                            );
+
+                            if(context.mounted){
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return MainScreen();
+                                },
+                              ),
+                            );
+                            }
+                            
                           }
                         },
                         child: CustomButton(
-                          buttonName: "Submit", 
-                          buttonColor: kMainColor, 
-                          nameColor: kWhite
+                          buttonName: "Submit",
+                          buttonColor: kMainColor,
+                          nameColor: kWhite,
                         ),
                       ),
                     ],

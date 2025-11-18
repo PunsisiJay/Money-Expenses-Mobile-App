@@ -1,8 +1,12 @@
+import 'package:expenzes_app/screens/main_screen.dart';
 import 'package:expenzes_app/screens/onboarding_screen.dart';
 import 'package:expenzes_app/screens/user_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main(){
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferences.getInstance();
   runApp(MyApp());
 }
 
@@ -17,8 +21,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Inter"
       ),
-      home: UserScreen()
+      home: MainScreen()
       //OnboardingScreen()
+      //UserScreen()
     );
   }
 }
