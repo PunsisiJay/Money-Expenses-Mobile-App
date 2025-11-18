@@ -1,4 +1,5 @@
 import 'package:expenzes_app/screens/onboarding_screen.dart';
+import 'package:expenzes_app/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Inter"
       ),
-      home: OnboardingScreen()
+      home: UserScreen()
+      //OnboardingScreen()
     );
   }
 }

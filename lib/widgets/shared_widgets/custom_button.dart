@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatefulWidget {
   final String buttonName;
   final Color buttonColor;
+  final Color nameColor;
 
   const CustomButton({
     super.key,
     required this.buttonName,
     required this.buttonColor,
+    required this.nameColor,
   });
 
   @override
@@ -22,12 +24,12 @@ class _CustomButtonState extends State<CustomButton> {
       height: MediaQuery.of(context).size.height * 0.06,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        color: kMainColor,
+        color: widget.buttonColor,
       ),
       child: Center(
         child: Text(
           widget.buttonName,
-          style: TextStyle(fontSize: 20, color: widget.buttonColor, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, color: widget.nameColor, fontWeight: FontWeight.bold),
         ),
       ),
     );

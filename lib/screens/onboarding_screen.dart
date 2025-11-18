@@ -2,6 +2,7 @@ import 'package:expenzes_app/constant/colors.dart';
 import 'package:expenzes_app/data/onboarding_data.dart';
 import 'package:expenzes_app/screens/onboarding/front_screen.dart';
 import 'package:expenzes_app/screens/onboarding/shared_onboarding_screen.dart';
+import 'package:expenzes_app/screens/user_screen.dart';
 import 'package:expenzes_app/widgets/shared_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -16,7 +17,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
 
   PageController _controller = PageController();
-  bool showDetailsPage = false;
+  bool showDetailsPage = true;
 
   @override
   Widget build(BuildContext context) {
@@ -80,17 +81,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Container(
-                      child: GestureDetector(
+                      child: !showDetailsPage ? GestureDetector(
                         onTap: () {
                           _controller.animateToPage(
                             _controller.page!.toInt() + 1, 
-                            duration: Duration(milliseconds: 400), 
+                            duration: Duration(milliseconds: 100), 
                             curve: Curves.easeInOut);
+                        },
+                        child:  CustomButton(
+                          buttonName: showDetailsPage ? "Get Started" : "Next", 
+                          buttonColor: kMainColor, 
+                          nameColor: kWhite
+                        ),
+                      ) :                      
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => UserScreen(),));
                         },
                         child: CustomButton(
                           buttonName: showDetailsPage ? "Get Started" : "Next", 
-                          buttonColor: kWhite
-                        ),
+                          buttonColor: kMainColor, 
+                          nameColor: kWhite),
                       ),
                     ),
                   ),
