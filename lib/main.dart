@@ -1,6 +1,3 @@
-import 'package:expenzes_app/screens/main_screen.dart';
-import 'package:expenzes_app/screens/onboarding_screen.dart';
-import 'package:expenzes_app/screens/user_screen.dart';
 import 'package:expenzes_app/widgets/wrapper_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
