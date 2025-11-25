@@ -19,26 +19,33 @@ class UserService {
           ),
         );
       } else {
-       
-       SharedPreferences pref = await SharedPreferences.getInstance();
-       await pref.setString("username", userName);
-       await pref.setString("email", userEmail);
-      
-       //Show a snackbar message to indicate that user data is saved successfully.
-       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("User data saved successfully!"))
-       );       
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        await pref.setString("username", userName);
+        await pref.setString("email", userEmail);
+
+        //Show a snackbar message to indicate that user data is saved successfully.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("User data saved successfully!")),
+        );
       }
     } catch (err) {
       err.toString();
     }
   }
 
-
   //Check if the username already exists in the local storage
   static Future<bool> checkUserAvailable() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String ? userName = pref.getString('username');
+    String? userName = pref.getString('username');
     return userName != null;
+  }
+
+  //Create a method as Future method for getting username and email
+  static Future<Map<String, String>> getUserNameandEmail() async {
+    //Create instance from SharedPreferences.
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? userName = pref.getString('username');
+    String? userEmail = pref.getString('email');
+    return {'username': userName ?? '', 'email': userEmail ?? ''};
   }
 }
