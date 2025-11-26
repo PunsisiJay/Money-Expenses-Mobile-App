@@ -14,15 +14,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-  int _currentIndex = 0;
+  int _currentIndex = 2;
 
   final List<Widget> page = [
     HomeScreen(),
     TransactionScreen(),
     AddNewScreen(),
     BudgetdScreen(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
 
   @override
@@ -33,7 +32,10 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.white,
         selectedItemColor: kMainColor,
         unselectedItemColor: kGrey,
-        selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+        selectedLabelStyle: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -56,12 +58,9 @@ class _MainScreenState extends State<MainScreen> {
                 color: kMainColor,
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Icons.add, 
-                size: 30, 
-                color: kWhite),
+              child: Icon(Icons.add, size: 30, color: kWhite),
             ),
-            label: ''
+            label: '',
           ),
 
           BottomNavigationBarItem(

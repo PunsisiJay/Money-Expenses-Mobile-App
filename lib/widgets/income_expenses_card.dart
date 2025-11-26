@@ -37,6 +37,8 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
+                width: 50,
+                height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: kWhite,

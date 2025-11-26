@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
 
-                            SizedBox(height: 30),
+                            SizedBox(height: 40),
 
                             //Income and expenses card containers.
                             Padding(
